@@ -1,0 +1,24 @@
+{
+  "name": "app",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Carlo Palinckx",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^9.2.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-is": "^16.12.0",
+    "styled-components": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.19",
+    "@types/styled-components": "^4.4.2"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  }
+}
