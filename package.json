@@ -9,13 +9,31 @@
   "author": "Carlo Palinckx <carlo@mijnwebwinkel.nl>",
   "license": "MIT",
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.12.0",
+    "@graphql-codegen/typescript": "^1.12.0",
+    "@graphql-codegen/typescript-operations": "^1.12.0",
+    "@graphql-codegen/typescript-react-apollo": "^1.12.0",
     "lerna": "^3.10.2",
     "prisma": "^1.34.10",
     "ts-node": "^8.6.2",
     "typescript": "^3.7.5"
   },
   "scripts": {
-    "lerna": "lerna"
+    "lerna": "lerna",
+    "codegen": "graphql-codegen"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@apollo/react-hooks": "3.0.0",
+    "@apollo/react-ssr": "3.0.0",
+    "apollo-cache-inmemory": "1.6.3",
+    "apollo-client": "2.6.4",
+    "apollo-link-http": "1.5.15",
+    "graphql": "^14.0.2",
+    "graphql-tag": "2.10.1",
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "latest",
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  }
 }

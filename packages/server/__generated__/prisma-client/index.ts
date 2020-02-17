@@ -16,7 +16,6 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
-  author: (where?: AuthorWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -39,25 +38,6 @@ export interface Prisma {
    * Queries
    */
 
-  author: (where: AuthorWhereUniqueInput) => AuthorNullablePromise;
-  authors: (args?: {
-    where?: AuthorWhereInput;
-    orderBy?: AuthorOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<Author>;
-  authorsConnection: (args?: {
-    where?: AuthorWhereInput;
-    orderBy?: AuthorOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => AuthorConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -83,36 +63,7 @@ export interface Prisma {
    * Mutations
    */
 
-  createAuthor: (data: AuthorCreateInput) => AuthorPromise;
-  updateAuthor: (args: {
-    data: AuthorUpdateInput;
-    where: AuthorWhereUniqueInput;
-  }) => AuthorPromise;
-  updateManyAuthors: (args: {
-    data: AuthorUpdateManyMutationInput;
-    where?: AuthorWhereInput;
-  }) => BatchPayloadPromise;
-  upsertAuthor: (args: {
-    where: AuthorWhereUniqueInput;
-    create: AuthorCreateInput;
-    update: AuthorUpdateInput;
-  }) => AuthorPromise;
-  deleteAuthor: (where: AuthorWhereUniqueInput) => AuthorPromise;
-  deleteManyAuthors: (where?: AuthorWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
-  updateUser: (args: {
-    data: UserUpdateInput;
-    where: UserWhereUniqueInput;
-  }) => UserPromise;
-  updateManyUsers: (args: {
-    data: UserUpdateManyMutationInput;
-    where?: UserWhereInput;
-  }) => BatchPayloadPromise;
-  upsertUser: (args: {
-    where: UserWhereUniqueInput;
-    create: UserCreateInput;
-    update: UserUpdateInput;
-  }) => UserPromise;
   deleteUser: (where: UserWhereUniqueInput) => UserPromise;
   deleteManyUsers: (where?: UserWhereInput) => BatchPayloadPromise;
 
@@ -124,9 +75,6 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  author: (
-    where?: AuthorSubscriptionWhereInput
-  ) => AuthorSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -140,53 +88,9 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type AuthorOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "name_ASC"
-  | "name_DESC";
-
-export type UserOrderByInput = "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC";
+export type UserOrderByInput = "id_ASC" | "id_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
-
-export type AuthorWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface AuthorWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  AND?: Maybe<AuthorWhereInput[] | AuthorWhereInput>;
-  OR?: Maybe<AuthorWhereInput[] | AuthorWhereInput>;
-  NOT?: Maybe<AuthorWhereInput[] | AuthorWhereInput>;
-}
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
@@ -207,60 +111,13 @@ export interface UserWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
   OR?: Maybe<UserWhereInput[] | UserWhereInput>;
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export interface AuthorCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-}
-
-export interface AuthorUpdateInput {
-  name?: Maybe<String>;
-}
-
-export interface AuthorUpdateManyMutationInput {
-  name?: Maybe<String>;
-}
-
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
-  name: String;
-}
-
-export interface UserUpdateInput {
-  name?: Maybe<String>;
-}
-
-export interface UserUpdateManyMutationInput {
-  name?: Maybe<String>;
-}
-
-export interface AuthorSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<AuthorWhereInput>;
-  AND?: Maybe<AuthorSubscriptionWhereInput[] | AuthorSubscriptionWhereInput>;
-  OR?: Maybe<AuthorSubscriptionWhereInput[] | AuthorSubscriptionWhereInput>;
-  NOT?: Maybe<AuthorSubscriptionWhereInput[] | AuthorSubscriptionWhereInput>;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -278,49 +135,45 @@ export interface NodeNode {
   id: ID_Output;
 }
 
-export interface Author {
+export interface User {
   id: ID_Output;
-  name: String;
 }
 
-export interface AuthorPromise extends Promise<Author>, Fragmentable {
+export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
 }
 
-export interface AuthorSubscription
-  extends Promise<AsyncIterator<Author>>,
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AuthorNullablePromise
-  extends Promise<Author | null>,
+export interface UserNullablePromise
+  extends Promise<User | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
 }
 
-export interface AuthorConnection {
+export interface UserConnection {
   pageInfo: PageInfo;
-  edges: AuthorEdge[];
+  edges: UserEdge[];
 }
 
-export interface AuthorConnectionPromise
-  extends Promise<AuthorConnection>,
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<AuthorEdge>>() => T;
-  aggregate: <T = AggregateAuthorPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
 }
 
-export interface AuthorConnectionSubscription
-  extends Promise<AsyncIterator<AuthorConnection>>,
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<AuthorEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateAuthorSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -344,84 +197,6 @@ export interface PageInfoSubscription
   hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
   startCursor: () => Promise<AsyncIterator<String>>;
   endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AuthorEdge {
-  node: Author;
-  cursor: String;
-}
-
-export interface AuthorEdgePromise extends Promise<AuthorEdge>, Fragmentable {
-  node: <T = AuthorPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface AuthorEdgeSubscription
-  extends Promise<AsyncIterator<AuthorEdge>>,
-    Fragmentable {
-  node: <T = AuthorSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateAuthor {
-  count: Int;
-}
-
-export interface AggregateAuthorPromise
-  extends Promise<AggregateAuthor>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateAuthorSubscription
-  extends Promise<AsyncIterator<AggregateAuthor>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface User {
-  id: ID_Output;
-  name: String;
-}
-
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface UserNullablePromise
-  extends Promise<User | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-}
-
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
-}
-
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
-}
-
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
 }
 
 export interface UserEdge {
@@ -473,50 +248,6 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface AuthorSubscriptionPayload {
-  mutation: MutationType;
-  node: Author;
-  updatedFields: String[];
-  previousValues: AuthorPreviousValues;
-}
-
-export interface AuthorSubscriptionPayloadPromise
-  extends Promise<AuthorSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = AuthorPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = AuthorPreviousValuesPromise>() => T;
-}
-
-export interface AuthorSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<AuthorSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = AuthorSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = AuthorPreviousValuesSubscription>() => T;
-}
-
-export interface AuthorPreviousValues {
-  id: ID_Output;
-  name: String;
-}
-
-export interface AuthorPreviousValuesPromise
-  extends Promise<AuthorPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-}
-
-export interface AuthorPreviousValuesSubscription
-  extends Promise<AsyncIterator<AuthorPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
 export interface UserSubscriptionPayload {
   mutation: MutationType;
   node: User;
@@ -544,21 +275,18 @@ export interface UserSubscriptionPayloadSubscription
 
 export interface UserPreviousValues {
   id: ID_Output;
-  name: String;
 }
 
 export interface UserPreviousValuesPromise
   extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
 }
 
 export interface UserPreviousValuesSubscription
   extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
 }
 
 /*
@@ -568,14 +296,14 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-/*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
@@ -591,10 +319,6 @@ export type Long = string;
 export const models: Model[] = [
   {
     name: "User",
-    embedded: false
-  },
-  {
-    name: "Author",
     embedded: false
   }
 ];

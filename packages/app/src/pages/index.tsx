@@ -1,21 +1,15 @@
 import React from 'react';
-import Card from '../components/Card';
+import { withApollo } from '../lib/apollo';
+import { useGetUsers } from '../__generated__';
 
 const Home = () => {
-  return (
-    <div style={{ width: '400px', margin: 'auto' }}>
-      <div>
-        <br />
-        <Card>Knippen</Card>
-        <br />
-        <Card>Verven</Card>
-        <br />
-        <Card>Fohnen</Card>
-        <br />
-        <Card>Baard</Card>
-      </div>
-    </div>
-  );
+  const { data, loading, error } = useGetUsers();
+
+  if (loading || error || data === undefined) {
+    return null;
+  }
+
+  return <div style={{ width: '400px', margin: 'auto' }}>home</div>;
 };
 
-export default Home;
+export default withApollo(Home);
